@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load custom_filters %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    {% for blog in blogs %}
+    <a href="{% url 'blogapp:blog_details' blog.slug %}"><h3 class="mt-5">{{blog.blog_title}}</h3></a>
+    <h5>{{blog.publish_date}}</h5>
+    <img src="{{ blog.blog_image.url }}" class="img-fluid" alt="{{blog.blog_title}}" title="{{blog.blog_title}}">
+    <p>{{blog.blog_content | range_filter}} <a href="{% url 'blogapp:blog_details' blog.slug %}"> Read More</a></p>
+    <h6>Posted By : <a href="">@{{blog.author}}</a></h6>
+    {% endfor %}
+    
+
+{% endblock %}
